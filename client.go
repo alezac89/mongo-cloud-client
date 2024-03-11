@@ -21,7 +21,7 @@ type Client struct {
 // AuthStruct -
 type AuthStruct struct {
 	Username string `json:"username"`
-	ApiKey string `json:"apiKey"`
+	Password string `json:"password"`
 }
 
 // AuthResponse -
@@ -32,7 +32,7 @@ type AuthResponse struct {
 }
 
 // NewClient -
-func NewClient(username, apiKey *string) (*Client, error) {
+func NewClient(username, password *string) (*Client, error) {
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
 		// Default Mongo Cloud URL
@@ -40,13 +40,13 @@ func NewClient(username, apiKey *string) (*Client, error) {
 	}
 
 	// If username or password not provided, return empty client
-	if username == nil || apiKey == nil {
+	if username == nil || password == nil {
 		return &c, nil
 	}
 
 	c.Auth = AuthStruct{
 		Username: *username,
-		ApiKey: *apiKey,
+		Password: *password,
 	}
 	
 
