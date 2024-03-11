@@ -8,3 +8,12 @@ type Function struct {
 	LastModified int64 `json:"last_modified"`
 	ReadOnly bool `json:"read_only"`
 }
+
+type FunctionDTO struct {
+	ID string `json:"id"`
+	Name string `json:"name"`
+	Source string `json:"source"`
+	Private bool `json:"private"`
+	LastModified int64 `json:"last_modified"`
+	ReadOnly bool `json:"read_only"`
+}
