@@ -16,23 +16,25 @@ type Client struct {
 	HTTPClient *http.Client
 	Token      string
 	Auth       AuthStruct
+	GroupId    string
+	AppId      string
 }
 
 // AuthStruct -
 type AuthStruct struct {
 	Username string `json:"username"`
-	ApiKey string `json:"apiKey"`
+	ApiKey   string `json:"apiKey"`
 }
 
 // AuthResponse -
 type AuthResponse struct {
-	AccessToken   string `json:"access_token"`
-	UserId string `json:"user_id"`
+	AccessToken string `json:"access_token"`
+	UserId      string `json:"user_id"`
 	DeviceId    string `json:"device_id"`
 }
 
 // NewClient -
-func NewClient(username, apiKey *string) (*Client, error) {
+func NewClient(username, apiKey, groupId, appId *string) (*Client, error) {
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
 		// Default Mongo Cloud URL
@@ -46,9 +48,11 @@ func NewClient(username, apiKey *string) (*Client, error) {
 
 	c.Auth = AuthStruct{
 		Username: *username,
-		ApiKey: *apiKey,
+		ApiKey:   *apiKey,
 	}
-	
+
+	c.GroupId = *groupId
+	c.AppId = *appId
 
 	ar, err := c.GetUserTokenSignIn()
 	if err != nil {
