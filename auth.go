@@ -10,8 +10,8 @@ import (
 
 // SignIn - Get a new token for user
 func (c *Client) GetUserTokenSignIn() (*AuthResponse, error) {
-	if c.Auth.Username == "" || c.Auth.Password == "" {
-		return nil, fmt.Errorf("define username and pasword")
+	if c.Auth.Username == "" || c.Auth.ApiKey == "" {
+		return nil, fmt.Errorf("define username and apiKey")
 	}
 	rb, err := json.Marshal(c.Auth)
 	if err != nil {
